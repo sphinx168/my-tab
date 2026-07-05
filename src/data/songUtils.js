@@ -23,3 +23,12 @@ export function linkType(url) {
   }
   return 'sheet';
 }
+
+// 供顯示用的簡短網域名稱，例如 https://www.youtube.com/... → youtube.com
+export function displayHost(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
