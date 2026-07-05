@@ -16,3 +16,11 @@ export function displayHost(url) {
     return url;
   }
 }
+
+export function isSpotify(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '') === 'open.spotify.com';
+  } catch {
+    return false;
+  }
+}

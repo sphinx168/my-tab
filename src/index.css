@@ -167,6 +167,28 @@ body::before {
   width: fit-content;
 }
 
+.spotify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  margin-top: 2px;
+  padding: 5px 14px 5px 10px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.spotify-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
 .ad-notes {
   margin: 10px 0 0;
   font-size: 0.88rem;
