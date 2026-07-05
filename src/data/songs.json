@@ -5,7 +5,8 @@
     "artist": "告五人",
     "tabAuthor": "拨片大王",
     "links": [
-      { "url": "https://www.bilibili.com/video/BV1yNVnz2EoM/?vd_source=c93157593fb668878a2472834feb5d36", "label": "全曲示範" }
+      { "url": "https://www.bilibili.com/video/BV1yNVnz2EoM/?vd_source=c93157593fb668878a2472834feb5d36", "label": "全曲示範" },
+      { "url": "https://open.spotify.com/track/27FOde2nUw0pFuj7hlPbaS", "label": "原曲 Spotify" }
     ],
     "status": "practicing",
     "difficulty": 0,
@@ -19,7 +20,8 @@
     "artist": "ONE OK ROCK",
     "tabAuthor": "かずき / ギターのある暮らし",
     "links": [
-      { "url": "https://www.youtube.com/watch?v=4zkauj_W34U", "label": "教學影片" }
+      { "url": "https://www.youtube.com/watch?v=4zkauj_W34U", "label": "教學影片" },
+      { "url": "https://open.spotify.com/track/3fSdTVHwb8ZyiYAFSE00qd", "label": "原曲 Spotify" }
     ],
     "status": "want-to-learn",
     "difficulty": 0,
@@ -33,7 +35,8 @@
     "artist": "怕胖團",
     "tabAuthor": "小溫WEN",
     "links": [
-      { "url": "https://www.youtube.com/watch?v=cXWuURQWVM4", "label": "雙吉他編制教學" }
+      { "url": "https://www.youtube.com/watch?v=cXWuURQWVM4", "label": "雙吉他編制教學" },
+      { "url": "https://open.spotify.com/track/0zru06eFVhTcexrcnjnQAj", "label": "原曲 Spotify" }
     ],
     "status": "want-to-learn",
     "difficulty": 0,

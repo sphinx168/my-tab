@@ -8,22 +8,6 @@ export const STATUSES = {
 
 export const STATUS_KEYS = Object.keys(STATUSES);
 
-// 由連結網址判斷來源類型，決定顯示哪種圖示
-export function linkType(url) {
-  try {
-    const host = new URL(url).hostname.replace(/^www\./, '');
-    if (host === 'youtu.be' || host === 'youtube.com' || host.endsWith('.youtube.com')) {
-      return 'youtube';
-    }
-    if (host === 'b23.tv' || host === 'bilibili.com' || host.endsWith('.bilibili.com')) {
-      return 'bilibili';
-    }
-  } catch {
-    // 無效網址一律當作樂譜連結
-  }
-  return 'sheet';
-}
-
 // 供顯示用的簡短網域名稱，例如 https://www.youtube.com/... → youtube.com
 export function displayHost(url) {
   try {
