@@ -32,6 +32,7 @@ npm run build     # 建置到 dist/
 - `src/components/`：展示元件（SongCard、StarRating、StatusBadge、SongLink），皆無自身狀態。`SongCard` 版面模仿報紙分類廣告：左側照片框 + 圖說，右側標題／狀態／byline／星等／連結／備註／日期。
 - 樣式在 `src/index.css`，手寫 CSS、無 UI 套件。設計主題「老報紙」：米白報紙底色、黑色襯線鉛字，色票與字體定義在 `:root` CSS 變數（`--paper`、`--ink`、`--crimson` 等），新樣式一律取用變數而非硬編色碼。字體：Playfair Display（標題）+ Noto Serif TC（內文），由 `index.html` 載入 Google Fonts。難度星等與連結皆為純文字呈現（無圖示），維持印刷品的單色調性。
 - 介面文字為繁體中文。
+- 頁尾「最後更新」日期是建置時間戳，非手動維護：`vite.config.js` 的 `define.__BUILD_DATE__` 在建置當下取當天日期字串，`App.jsx` 直接引用該全域常數。每次 push 觸發 Netlify 重新建置就會自動更新，不需要手動改日期。
 
 ## 部署
 

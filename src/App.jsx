@@ -1,5 +1,4 @@
 import songs from './data/songs.json';
-import { STATUSES } from './data/songUtils';
 import SongCard from './components/SongCard';
 
 const sortedSongs = [...songs].sort((a, b) => (b.addedAt || '').localeCompare(a.addedAt || ''));
@@ -21,7 +20,7 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <p>進度階段：{Object.values(STATUSES).map((s) => s.label).join(' → ')}</p>
+        <p>最後更新：{__BUILD_DATE__}</p>
       </footer>
     </div>
   );
