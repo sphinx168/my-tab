@@ -1,33 +1,47 @@
 import StarRating from './StarRating';
 import StatusBadge from './StatusBadge';
-import LinkIcon from './LinkIcon';
+import SongLink from './SongLink';
 
 export default function SongCard({ song }) {
   return (
-    <article className="song-card">
-      <div className="card-top">
-        <StatusBadge status={song.status} />
-        <StarRating value={song.difficulty} />
+    <article className="ad">
+      <div>
+        <div className="ad-photo" aria-hidden="true">
+          <svg width="46" height="46" viewBox="0 0 24 24">
+            <path
+              d="M9 3.5a1 1 0 0 1 1-1h9.5a1 1 0 0 1 1 1v13.2a3.3 3.3 0 1 1-2-3V7.5H11v9.2a3.3 3.3 0 1 1-2-3Z"
+              fill="#1c1a16"
+            />
+          </svg>
+        </div>
+        <p className="ad-caption">〈{song.title}〉練習手稿</p>
       </div>
 
-      <h2 className="song-title">{song.title}</h2>
-      <p className="song-artist">{song.artist}</p>
-      <p className="song-tab-author">
-        <span className="eyebrow">採譜</span>
-        {song.tabAuthor}
-      </p>
-
-      {song.links?.length > 0 && (
-        <div className="song-links">
-          {song.links.map((link) => (
-            <LinkIcon key={link.url} link={link} />
-          ))}
+      <div>
+        <div className="ad-head">
+          <h2 className="ad-title">{song.title}</h2>
+          <StatusBadge status={song.status} />
         </div>
-      )}
+        <p className="ad-byline">
+          {song.artist} 演唱 · {song.tabAuthor} 採譜
+        </p>
 
-      {song.notes && <p className="song-notes">{song.notes}</p>}
+        <p className="ad-rating-line">
+          <StarRating value={song.difficulty} />
+        </p>
 
-      {song.addedAt && <p className="song-date">收錄於 {song.addedAt}</p>}
+        {song.links?.length > 0 && (
+          <div className="ad-links">
+            {song.links.map((link) => (
+              <SongLink key={link.url} link={link} />
+            ))}
+          </div>
+        )}
+
+        {song.notes && <p className="ad-notes">{song.notes}</p>}
+
+        {song.addedAt && <p className="ad-date">刊登日期：{song.addedAt}</p>}
+      </div>
     </article>
   );
 }

@@ -1,21 +1,13 @@
-/* ── 色票：玫瑰木琴頸、骨白、黃銅琴衍 ─────────────────── */
+/* ── 色票：米白報紙、鉛字黑、緋紅印記 ─────────────────── */
 :root {
-  --bg: #2a211a;
-  --bg-deep: #221a14;
-  --surface: #34291f;
-  --surface-raised: #3d3025;
-  --line: #4d3d2d;
-  --ink: #f0e6d6;
-  --muted: #ab9179;
-  --faint: #7d6852;
-  --brass: #d9a441;
-  --brass-soft: rgba(217, 164, 65, 0.14);
-  --st-want: #8d7a68;
-  --st-practicing: #d9a441;
-  --st-playable: #93b06f;
-  --st-mastered: #82b7cb;
-  --font-display: 'Fraunces', 'Noto Serif TC', serif;
-  --font-body: 'Noto Sans TC', system-ui, sans-serif;
+  --paper: #ece4d1;
+  --ink: #1c1a16;
+  --ink-soft: #3d382f;
+  --rule: #1c1a16;
+  --rule-faint: #a89d80;
+  --crimson: #7c2029;
+  --font-display: 'Playfair Display', 'Noto Serif TC', serif;
+  --font-body: 'Noto Serif TC', serif;
 }
 
 * {
@@ -24,236 +16,172 @@
 
 body {
   margin: 0;
-  background: var(--bg);
-  background-image: radial-gradient(ellipse 120% 80% at 50% -20%, #37291d 0%, var(--bg) 60%);
+  background: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.04), transparent 60%), var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+
+/* 印刷網點紋理 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  background-image: radial-gradient(circle, #000 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
 }
 
 .page {
-  max-width: 1080px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 0 24px 48px;
-}
-
-/* ── Hero：標題坐在六線譜上 ─────────────────────────── */
-.hero {
-  padding: 72px 0 40px;
-  text-align: center;
-}
-
-.staff {
+  padding: 28px 24px 80px;
   position: relative;
-  padding: 34px 0;
+  z-index: 2;
 }
 
-.staff::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--line) 0,
-    var(--line) 1px,
-    transparent 1px,
-    transparent 22px
-  );
-  background-size: 100% 22px;
-  height: calc(22px * 5 + 1px);
-  top: 50%;
-  transform: translateY(-50%);
+/* ── 精簡標頭 ──────────────────────────────────────── */
+.masthead-mini {
+  margin: 26px 0 22px;
 }
 
-.hero-eyebrow,
-.hero-title {
-  position: relative;
-  display: inline-block;
-  background: var(--bg);
-  padding: 0 20px;
-}
-
-.hero-eyebrow {
-  display: block;
-  width: fit-content;
-  margin: 0 auto 6px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--brass);
-}
-
-.hero-title {
-  margin: 0;
+.masthead-mini h1 {
+  margin: 0 0 10px;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 900;
+  font-size: 1.6rem;
   letter-spacing: 0.06em;
 }
 
-.hero-sub {
-  margin: 18px 0 0;
-  color: var(--muted);
-  font-size: 0.95rem;
+.rule-thin {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
 }
 
-/* ── 歌曲卡片 ──────────────────────────────────────── */
-.song-grid {
+/* ── 分類廣告：曲目卡片 ────────────────────────────── */
+.classifieds {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 0;
 }
 
-.song-card {
+.ad {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule-faint);
+}
+
+.ad:first-child {
+  border-top: 1px solid var(--rule-faint);
+}
+
+.ad-photo {
+  width: 108px;
+  height: 108px;
+  border: 1px solid var(--rule);
+  background: #d8cfb8;
   display: flex;
-  flex-direction: column;
-  padding: 22px 22px 18px;
-  background: linear-gradient(160deg, var(--surface-raised), var(--surface));
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  transition: transform 0.18s ease, border-color 0.18s ease;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(1) contrast(1.15);
 }
 
-.song-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--faint);
+.ad-caption {
+  margin: 6px 0 0;
+  font-size: 0.68rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: center;
+  width: 108px;
 }
 
-.card-top {
+.ad-head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.stars {
-  display: inline-flex;
-  gap: 2px;
-}
-
-.stars-unrated {
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  color: var(--faint);
-}
-
-.status-badge {
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  padding: 3px 11px;
-  border-radius: 999px;
-  border: 1px solid currentColor;
-}
-
-.status-want-to-learn {
-  color: var(--st-want);
-}
-.status-practicing {
-  color: var(--st-practicing);
-}
-.status-playable {
-  color: var(--st-playable);
-}
-.status-mastered {
-  color: var(--st-mastered);
-}
-
-.song-title {
+.ad-title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.45rem;
-  line-height: 1.25;
+  font-weight: 700;
+  font-size: 1.55rem;
 }
 
-.song-artist {
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.song-tab-author {
-  margin: 12px 0 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.eyebrow {
-  display: inline-block;
-  margin-right: 8px;
-  padding: 1px 7px;
+.ad-status {
   font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  color: var(--brass);
-  border: 1px solid var(--brass-soft);
-  background: var(--brass-soft);
-  border-radius: 5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  padding: 2px 9px;
+  white-space: nowrap;
 }
 
-.song-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.song-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  font-size: 0.82rem;
-  color: var(--ink);
-  text-decoration: none;
-  background: var(--bg-deep);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  transition: border-color 0.15s, color 0.15s;
-}
-
-.song-link:hover {
-  border-color: var(--brass);
-  color: var(--brass);
-}
-
-.link-youtube svg {
-  color: #e06a5a;
-}
-.link-bilibili svg {
-  color: #7fb5d5;
-}
-.link-sheet svg {
-  color: var(--brass);
-}
-
-.song-notes {
-  margin: 16px 0 0;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+.ad-byline {
+  margin: 4px 0 0;
   font-size: 0.88rem;
-  color: var(--muted);
-  line-height: 1.7;
-  flex: 1;
+  color: var(--ink-soft);
+  font-style: italic;
 }
 
-.song-date {
-  margin: 14px 0 0;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  color: var(--faint);
+.ad-rating-line {
+  margin: 10px 0 0;
+}
+
+.ad-rating {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.ad-rating-empty {
+  opacity: 0.25;
+  letter-spacing: 2px;
+}
+
+.ad-links {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ad-link {
+  font-size: 0.85rem;
+  color: var(--crimson);
+  text-decoration: underline;
+  width: fit-content;
+}
+
+.ad-notes {
+  margin: 10px 0 0;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.ad-date {
+  margin: 8px 0 0;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
 }
 
 /* ── 頁尾 ──────────────────────────────────────────── */
 .site-footer {
-  margin-top: 56px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 4px double var(--rule);
   text-align: center;
-  font-size: 0.8rem;
-  color: var(--faint);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
 }
 
 .site-footer p {
@@ -262,7 +190,7 @@ body {
 
 /* ── 無障礙與響應式 ────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--brass);
+  outline: 2px solid var(--crimson);
   outline-offset: 2px;
 }
 
@@ -272,8 +200,17 @@ body {
   }
 }
 
-@media (max-width: 560px) {
-  .hero {
-    padding: 48px 0 28px;
+@media (max-width: 600px) {
+  .ad {
+    grid-template-columns: 84px 1fr;
+  }
+
+  .ad-photo {
+    width: 84px;
+    height: 84px;
+  }
+
+  .ad-caption {
+    width: 84px;
   }
 }
