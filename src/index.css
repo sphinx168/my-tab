@@ -210,11 +210,56 @@ body {
   border-color: var(--faint);
 }
 
-.card-top {
+.card-body {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
+  gap: 18px;
+}
+
+.card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 10px;
+  width: 92px;
+  text-align: right;
+}
+
+.card-side .guitar-mark {
+  margin-top: auto;
+}
+
+.bpm-badge {
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+@media (max-width: 480px) {
+  .card-body {
+    flex-direction: column;
+  }
+
+  .card-side {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    order: -1;
+    margin-bottom: 4px;
+  }
+
+  .card-side .guitar-mark {
+    display: none;
+  }
+
+  .bpm-badge {
+    margin-left: auto;
+  }
 }
 
 .stars {

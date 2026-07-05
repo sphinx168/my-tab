@@ -24,11 +24,12 @@ npm run build     # 建置到 dist/
 - `links`：陣列，可多個；來源類型（YouTube / Bilibili / 其他一律視為樂譜）由 `songUtils.js` 的 `linkType()` 從網址自動判斷，不需手動標記
 - `notes` 為空字串、`links` 為空陣列時，卡片會自動省略該區塊
 - `addedAt`（`YYYY-MM-DD`）供「最新收錄」排序使用
+- `bpm`：選填數字，歌曲節奏。省略或設為 `0` 時卡片右側不顯示 BPM 標籤
 
 ## 架構
 
 - `src/App.jsx`：唯一的頁面。build 時直接 import `songs.json`，篩選（搜尋文字、狀態、難度）與排序（`SORTS`）都在這裡用 `useMemo` 完成；`FilterBar` 是受控元件，filters 狀態集中在 App。
-- `src/components/`：展示元件（SongCard、StarRating、StatusBadge、LinkIcon、FilterBar），皆無自身狀態。
+- `src/components/`：展示元件（SongCard、StarRating、StatusBadge、LinkIcon、GuitarMark、FilterBar），皆無自身狀態。`SongCard` 為左右兩欄版面：`card-main`（標題／作者／採譜／連結／備註／日期）+ `card-side`（狀態徽章／星等／BPM／裝飾圖示），靠 `.card-body` 的 flex row 排版。
 - 樣式在 `src/index.css`，手寫 CSS、無 UI 套件。設計主題「玫瑰木與黃銅」：色票與字體都定義在 `:root` CSS 變數（`--brass`、`--bg` 等），新樣式一律取用變數而非硬編色碼。字體：Fraunces（display，英文標題）+ Noto Sans TC（內文），由 `index.html` 載入 Google Fonts。
 - 介面文字為繁體中文。
 
