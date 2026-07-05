@@ -1,0 +1,56 @@
+[
+  {
+    "id": "tasogare",
+    "title": "黄昏 (Twilight)",
+    "artist": "押尾コータロー",
+    "tabAuthor": "官方樂譜集《Be HAPPY》",
+    "links": [
+      { "url": "https://www.youtube.com/watch?v=B90utPXKg9A", "label": "官方演奏影片" },
+      { "url": "https://example.com/tabs/tasogare.pdf", "label": "樂譜 PDF" }
+    ],
+    "status": "practicing",
+    "difficulty": 4,
+    "notes": "泛音段落還不穩，第二段的敲板節奏容易趕拍，先用 70% 速度慢練。",
+    "addedAt": "2026-05-18"
+  },
+  {
+    "id": "sunny-day",
+    "title": "晴天",
+    "artist": "周杰倫",
+    "tabAuthor": "Wen吉他",
+    "links": [
+      { "url": "https://www.bilibili.com/video/BV1xx411c7mD", "label": "教學影片" }
+    ],
+    "status": "playable",
+    "difficulty": 3,
+    "notes": "已經可以完整彈完，但前奏的悶音顆粒感還想再修，副歌情緒可以再放開一點。",
+    "addedAt": "2026-03-02"
+  },
+  {
+    "id": "tears-in-heaven",
+    "title": "Tears in Heaven",
+    "artist": "Eric Clapton",
+    "tabAuthor": "Ultimate Guitar (ver.4)",
+    "links": [
+      { "url": "https://tabs.ultimate-guitar.com/tab/eric-clapton/tears-in-heaven-tabs-30306", "label": "Tab 樂譜" }
+    ],
+    "status": "mastered",
+    "difficulty": 2,
+    "notes": "第一首完整學起來的指彈曲，現在當作每天的暖手曲目。",
+    "addedAt": "2025-11-20"
+  },
+  {
+    "id": "merry-christmas-mr-lawrence",
+    "title": "Merry Christmas Mr. Lawrence",
+    "artist": "坂本龍一",
+    "tabAuthor": "岸部眞明 改編",
+    "links": [
+      { "url": "https://www.youtube.com/watch?v=Iht3AUv_ElA", "label": "示範演奏" },
+      { "url": "https://www.bilibili.com/video/BV1GJ411x7h7", "label": "逐句教學" }
+    ],
+    "status": "want-to-learn",
+    "difficulty": 5,
+    "notes": "特殊調弦 (DADGAD)，等〈黄昏〉練完再開這首。",
+    "addedAt": "2026-06-28"
+  }
+]

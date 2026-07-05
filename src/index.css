@@ -1,0 +1,377 @@
+/* ── 色票：玫瑰木琴頸、骨白、黃銅琴衍 ─────────────────── */
+:root {
+  --bg: #2a211a;
+  --bg-deep: #221a14;
+  --surface: #34291f;
+  --surface-raised: #3d3025;
+  --line: #4d3d2d;
+  --ink: #f0e6d6;
+  --muted: #ab9179;
+  --faint: #7d6852;
+  --brass: #d9a441;
+  --brass-soft: rgba(217, 164, 65, 0.14);
+  --st-want: #8d7a68;
+  --st-practicing: #d9a441;
+  --st-playable: #93b06f;
+  --st-mastered: #82b7cb;
+  --font-display: 'Fraunces', 'Noto Serif TC', serif;
+  --font-body: 'Noto Sans TC', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 120% 80% at 50% -20%, #37291d 0%, var(--bg) 60%);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+/* ── Hero：標題坐在六線譜上 ─────────────────────────── */
+.hero {
+  padding: 72px 0 40px;
+  text-align: center;
+}
+
+.staff {
+  position: relative;
+  padding: 34px 0;
+}
+
+.staff::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--line) 0,
+    var(--line) 1px,
+    transparent 1px,
+    transparent 22px
+  );
+  background-size: 100% 22px;
+  height: calc(22px * 5 + 1px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hero-eyebrow,
+.hero-title {
+  position: relative;
+  display: inline-block;
+  background: var(--bg);
+  padding: 0 20px;
+}
+
+.hero-eyebrow {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  letter-spacing: 0.06em;
+}
+
+.hero-sub {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ── 篩選列 ────────────────────────────────────────── */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  padding: 14px 16px;
+  margin-bottom: 28px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.search-input {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.search-input::placeholder {
+  color: var(--faint);
+}
+
+.status-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 13px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.chip:hover {
+  color: var(--ink);
+  border-color: var(--faint);
+}
+
+.chip-active {
+  color: var(--brass);
+  background: var(--brass-soft);
+  border-color: var(--brass);
+}
+
+.chip-count {
+  opacity: 0.7;
+  font-size: 0.78rem;
+  margin-left: 2px;
+}
+
+.filter-selects {
+  display: flex;
+  gap: 14px;
+}
+
+.select-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.select-label select {
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ── 歌曲卡片 ──────────────────────────────────────── */
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.song-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 18px;
+  background: linear-gradient(160deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.song-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--faint);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.status-badge {
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+
+.status-want-to-learn {
+  color: var(--st-want);
+}
+.status-practicing {
+  color: var(--st-practicing);
+}
+.status-playable {
+  color: var(--st-playable);
+}
+.status-mastered {
+  color: var(--st-mastered);
+}
+
+.song-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+
+.song-artist {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.song-tab-author {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 1px 7px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--brass);
+  border: 1px solid var(--brass-soft);
+  background: var(--brass-soft);
+  border-radius: 5px;
+}
+
+.song-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.song-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.song-link:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+
+.link-youtube svg {
+  color: #e06a5a;
+}
+.link-bilibili svg {
+  color: #7fb5d5;
+}
+.link-sheet svg {
+  color: var(--brass);
+}
+
+.song-notes {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.song-date {
+  margin: 14px 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--faint);
+}
+
+/* ── 空狀態與頁尾 ──────────────────────────────────── */
+.empty-state {
+  padding: 64px 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-state p {
+  margin: 0 0 16px;
+}
+
+.site-footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* ── 無障礙與響應式 ────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 48px 0 28px;
+  }
+
+  .filter-selects {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
