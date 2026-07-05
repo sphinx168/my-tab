@@ -222,6 +222,12 @@ body {
   gap: 2px;
 }
 
+.stars-unrated {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+}
+
 .status-badge {
   font-size: 0.76rem;
   font-weight: 500;

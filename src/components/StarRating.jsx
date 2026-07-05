@@ -14,6 +14,9 @@ function Star({ filled }) {
 }
 
 export default function StarRating({ value }) {
+  if (!value) {
+    return <span className="stars stars-unrated">難度未評</span>;
+  }
   return (
     <span className="stars" role="img" aria-label={`難度 ${value} / 5`}>
       {[1, 2, 3, 4, 5].map((n) => (
