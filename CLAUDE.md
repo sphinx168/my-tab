@@ -27,8 +27,8 @@ npm run build     # 建置到 dist/
 
 ## 架構
 
-- `src/App.jsx`：唯一的頁面。build 時直接 import `songs.json`，篩選（搜尋文字、狀態、難度）與排序（`SORTS`）都在這裡用 `useMemo` 完成；`FilterBar` 是受控元件，filters 狀態集中在 App。
-- `src/components/`：展示元件（SongCard、StarRating、StatusBadge、LinkIcon、FilterBar），皆無自身狀態。
+- `src/App.jsx`：唯一的頁面。build 時直接 import `songs.json`，依 `addedAt` 排序後渲染全部歌曲，無篩選/搜尋 UI（歌曲數量還少，之後量多再考慮加回來）。
+- `src/components/`：展示元件（SongCard、StarRating、StatusBadge、LinkIcon），皆無自身狀態。
 - 樣式在 `src/index.css`，手寫 CSS、無 UI 套件。設計主題「玫瑰木與黃銅」：色票與字體都定義在 `:root` CSS 變數（`--brass`、`--bg` 等），新樣式一律取用變數而非硬編色碼。字體：Fraunces（display，英文標題）+ Noto Sans TC（內文），由 `index.html` 載入 Google Fonts。
 - 介面文字為繁體中文。
 
