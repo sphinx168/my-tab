@@ -2,7 +2,7 @@
 
 記錄吉他歌曲收藏的靜態網站：曲名、演唱者、採譜者、譜源連結（樂譜 / YouTube / Bilibili）、練習進度、難度與練習心得。
 
-React + Vite 建置，資料存在 repo 內的 JSON 檔，push 後由 Netlify 自動部署。
+React + Vite 建置，資料存在 repo 內的 JSON 檔，push 後由 Netlify 自動部署（已於 2026-07-05 連結 GitHub repo）。
 
 ## 如何新增 / 編輯歌曲
 
