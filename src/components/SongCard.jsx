@@ -28,6 +28,7 @@ export default function SongCard({ song }) {
 
         <p className="ad-rating-line">
           <StarRating value={song.difficulty} />
+          {song.bpm > 0 && <span className="ad-bpm">　·　每分鐘 {song.bpm} 拍</span>}
         </p>
 
         {song.links?.length > 0 && (

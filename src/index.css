@@ -146,6 +146,13 @@ body::before {
   letter-spacing: 2px;
 }
 
+.ad-bpm {
+  font-size: 0.85rem;
+  letter-spacing: normal;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
 .ad-links {
   margin-top: 10px;
   display: flex;
