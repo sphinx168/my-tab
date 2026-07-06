@@ -189,6 +189,48 @@ body::before {
   color: var(--paper);
 }
 
+.ad-tab {
+  margin-top: 10px;
+}
+
+.ad-tab summary {
+  font-size: 0.85rem;
+  color: var(--crimson);
+  text-decoration: underline;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.ad-tab[open] summary {
+  margin-bottom: 10px;
+}
+
+.ad-tab-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ad-tab-image {
+  max-width: 220px;
+  max-height: 300px;
+  border: 1px solid var(--rule);
+  filter: grayscale(1) contrast(1.1);
+}
+
+.ad-tab-text {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--rule-faint);
+  background: rgba(0, 0, 0, 0.02);
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
 .ad-notes {
   margin: 10px 0 0;
   font-size: 0.88rem;
