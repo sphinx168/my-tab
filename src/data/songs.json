@@ -6,7 +6,8 @@
     "tabAuthor": "拨片大王",
     "links": [
       { "url": "https://www.bilibili.com/video/BV1yNVnz2EoM/?vd_source=c93157593fb668878a2472834feb5d36", "label": "全曲示範" },
-      { "url": "https://open.spotify.com/track/27FOde2nUw0pFuj7hlPbaS", "label": "原曲 Spotify" }
+      { "url": "https://open.spotify.com/track/27FOde2nUw0pFuj7hlPbaS", "label": "原曲 Spotify" },
+      { "url": "https://www.songsterr.com/a/wsa/tab-s1380411t0", "label": "Songsterr 互動譜" }
     ],
     "status": "practicing",
     "difficulty": 0,
