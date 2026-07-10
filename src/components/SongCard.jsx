@@ -1,6 +1,7 @@
 import StarRating from './StarRating';
 import StatusBadge from './StatusBadge';
 import SongLink from './SongLink';
+import TabSheet from './TabSheet';
 
 export default function SongCard({ song }) {
   return (
@@ -38,6 +39,8 @@ export default function SongCard({ song }) {
             ))}
           </div>
         )}
+
+        <TabSheet sheet={song.sheet} />
 
         {song.notes && <p className="ad-notes">{song.notes}</p>}
 

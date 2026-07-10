@@ -6,7 +6,8 @@
     "tabAuthor": "拨片大王",
     "links": [
       { "url": "https://www.bilibili.com/video/BV1yNVnz2EoM/?vd_source=c93157593fb668878a2472834feb5d36", "label": "全曲示範" },
-      { "url": "https://open.spotify.com/track/27FOde2nUw0pFuj7hlPbaS", "label": "原曲 Spotify" }
+      { "url": "https://open.spotify.com/track/27FOde2nUw0pFuj7hlPbaS", "label": "原曲 Spotify" },
+      { "url": "https://www.songsterr.com/a/wsa/tab-s1380411t0", "label": "Songsterr 互動譜" }
     ],
     "status": "practicing",
     "difficulty": 0,
@@ -43,6 +44,42 @@
     "bpm": 97,
     "notes": "",
     "addedAt": "2026-07-05"
+  },
+  {
+    "id": "wu-lu-shi",
+    "title": "無路矢",
+    "artist": "MyGO!!!!!",
+    "tabAuthor": "",
+    "links": [],
+    "status": "want-to-learn",
+    "difficulty": 0,
+    "bpm": 0,
+    "notes": "",
+    "addedAt": "2026-07-06"
+  },
+  {
+    "id": "wherever-you-are",
+    "title": "Wherever You Are",
+    "artist": "ONE OK ROCK",
+    "tabAuthor": "",
+    "links": [],
+    "status": "want-to-learn",
+    "difficulty": 0,
+    "bpm": 0,
+    "notes": "",
+    "addedAt": "2026-07-06"
+  },
+  {
+    "id": "duvet",
+    "title": "Duvet",
+    "artist": "Bôa",
+    "tabAuthor": "",
+    "links": [],
+    "status": "want-to-learn",
+    "difficulty": 0,
+    "bpm": 0,
+    "notes": "",
+    "addedAt": "2026-07-06"
   },
   {
     "id": "korogaru-iwa-kimi-ni-asa-ga-furu",
