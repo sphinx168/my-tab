@@ -61,6 +61,73 @@ body::before {
   margin: 0;
 }
 
+/* ── 搜尋與篩選 ────────────────────────────────────── */
+.catalogue-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.8fr) repeat(3, minmax(120px, 1fr));
+  gap: 12px;
+  align-items: end;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-faint);
+}
+
+.control-field {
+  display: grid;
+  gap: 4px;
+}
+
+.control-field label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.control-field input,
+.control-field select,
+.clear-filters {
+  min-height: 36px;
+  border: 1px solid var(--rule-faint);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.84rem;
+}
+
+.control-field input,
+.control-field select {
+  width: 100%;
+  padding: 5px 8px;
+}
+
+.control-field input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+.clear-filters {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.clear-filters:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.result-count {
+  margin: 12px 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.empty-results {
+  margin: 0;
+  padding: 38px 0;
+  border-bottom: 1px solid var(--rule-faint);
+  color: var(--ink-soft);
+}
+
 /* ── 分類廣告：曲目卡片 ────────────────────────────── */
 .classifieds {
   display: grid;
@@ -272,6 +339,18 @@ body::before {
 }
 
 @media (max-width: 600px) {
+  .catalogue-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .control-search {
+    grid-column: 1 / -1;
+  }
+
+  .clear-filters {
+    grid-column: 1 / -1;
+  }
+
   .ad {
     grid-template-columns: 84px 1fr;
   }
