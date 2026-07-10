@@ -43,5 +43,35 @@
     "bpm": 97,
     "notes": "",
     "addedAt": "2026-07-05"
+  },
+  {
+    "id": "korogaru-iwa-kimi-ni-asa-ga-furu",
+    "title": "転がる岩、君に朝が降る",
+    "artist": "結束バンド",
+    "tabAuthor": "奔奔史密斯",
+    "links": [
+      { "url": "https://www.bilibili.com/video/BV1gP411i7ds/", "label": "教學影片" },
+      { "url": "https://open.spotify.com/track/2pK7RDBr3pc79fvFLCWpBW", "label": "原曲 Spotify" }
+    ],
+    "status": "want-to-learn",
+    "difficulty": 2,
+    "bpm": 149,
+    "notes": "",
+    "addedAt": "2026-07-10"
+  },
+  {
+    "id": "re-re",
+    "title": "Re:Re:",
+    "artist": "結束バンド",
+    "tabAuthor": "奔奔史密斯",
+    "links": [
+      { "url": "https://www.bilibili.com/video/BV16SLJzyEYk/", "label": "教學影片" },
+      { "url": "https://open.spotify.com/track/2XQ0xNRjpO6xEwPTow2wCn", "label": "原曲 Spotify" }
+    ],
+    "status": "want-to-learn",
+    "difficulty": 4,
+    "bpm": 153,
+    "notes": "",
+    "addedAt": "2026-07-10"
   }
 ]
