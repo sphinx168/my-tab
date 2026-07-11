@@ -35,7 +35,7 @@ npm test          # 使用 Node 內建測試執行時間與完成度工具測試
 ## 架構
 
 - `src/App.jsx`：唯一的頁面。build 時直接 import `songs.json`，提供歌名搜尋、狀態／難度篩選與排序，並管理全頁唯一的作用中節拍器。
-- `src/components/`：`SongCard` 顯示曲目摘要與進度；`SongDetails` 用原生 `<details>` 收合連結、節拍器、結構化筆記與譜面；`Metronome` 使用 Web Audio API，且全頁同時只播放一個。`TabSheet` 在詳情內二次收合六線譜／和弦內容。
+- `src/components/`：`SongCard` 顯示曲目摘要與進度；`SongDetails` 用原生 `<details>` 收合連結、節拍器、結構化筆記與譜面；`Metronome` 使用 Web Audio API，以「電子・柔亮」音色播放，且全頁同時只播放一個。`TabSheet` 在詳情內二次收合六線譜／和弦內容。
 - 樣式在 `src/index.css`，手寫 CSS、無 UI 套件。設計主題「老報紙」：米白報紙底色、黑色襯線鉛字，色票與字體定義在 `:root` CSS 變數（`--paper`、`--ink`、`--crimson` 等），新樣式一律取用變數而非硬編色碼。字體：Playfair Display（標題）+ Noto Serif TC（內文），由 `index.html` 載入 Google Fonts。難度星等與連結皆為純文字呈現（無圖示），維持印刷品的單色調性。
 - 介面文字為繁體中文。
 - 頁尾「最後更新」日期是建置時間戳，非手動維護：`vite.config.js` 的 `define.__BUILD_DATE__` 在建置當下取當天日期字串，`App.jsx` 直接引用該全域常數。每次 push 觸發 GitHub Actions 重新建置就會自動更新，不需要手動改日期。

@@ -7,7 +7,35 @@ function clampBpm(value) {
   return Math.min(MAX_BPM, Math.max(MIN_BPM, Math.round(value)));
 }
 
-export default function Metronome({ songId, songBpm, activeId, onActivate, onDeactivate }) {
+function scheduleOscillator(context, time, options) {
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.type = options.type || 'sine';
+  oscillator.frequency.setValueAtTime(options.frequency, time);
+  if (options.endFrequency) {
+    oscillator.frequency.exponentialRampToValueAtTime(options.endFrequency, time + options.duration);
+  }
+  gain.gain.setValueAtTime(options.gain, time);
+  gain.gain.exponentialRampToValueAtTime(0.0001, time + options.duration);
+  oscillator.connect(gain);
+  gain.connect(context.destination);
+  oscillator.start(time);
+  oscillator.stop(time + options.duration + 0.01);
+}
+
+function scheduleTone(context, time) {
+  scheduleOscillator(context, time, {
+    type: 'triangle', frequency: 1200, endFrequency: 920, gain: 0.09, duration: 0.075,
+  });
+}
+
+export default function Metronome({
+  songId,
+  songBpm,
+  activeId,
+  onActivate,
+  onDeactivate,
+}) {
   const initialBpm = songBpm > 0 ? songBpm : 120;
   const [bpm, setBpm] = useState(initialBpm);
   const [pulse, setPulse] = useState(false);
@@ -63,15 +91,7 @@ export default function Metronome({ songId, songBpm, activeId, onActivate, onDea
 
     while (nextBeatTimeRef.current < context.currentTime + 0.1) {
       const beatTime = nextBeatTimeRef.current;
-      const oscillator = context.createOscillator();
-      const gain = context.createGain();
-      oscillator.frequency.setValueAtTime(1100, beatTime);
-      gain.gain.setValueAtTime(0.3, beatTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, beatTime + 0.06);
-      oscillator.connect(gain);
-      gain.connect(context.destination);
-      oscillator.start(beatTime);
-      oscillator.stop(beatTime + 0.07);
+      scheduleTone(context, beatTime);
 
       schedulePulse(Math.max(0, (beatTime - context.currentTime) * 1000));
       nextBeatTimeRef.current += 60 / bpmRef.current;
