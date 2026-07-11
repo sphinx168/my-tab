@@ -1,13 +1,24 @@
-/* ── 色票：米白報紙、鉛字黑、緋紅印記 ─────────────────── */
+/* ── 色票：中性灰階 + 靛藍重點色 ─────────────────────── */
 :root {
-  --paper: #ece4d1;
-  --ink: #1c1a16;
-  --ink-soft: #3d382f;
-  --rule: #1c1a16;
-  --rule-faint: #a89d80;
-  --crimson: #7c2029;
-  --font-display: 'Playfair Display', 'Noto Serif TC', serif;
-  --font-body: 'Noto Serif TC', serif;
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-soft: #71717a;
+  --text-faint: #a1a1aa;
+
+  --indigo-50: #eef2ff;
+  --indigo-100: #e0e7ff;
+  --indigo-300: #a5b4fc;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
+  --indigo-700: #4338ca;
+  --indigo-900: #312e81;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(24, 24, 27, 0.04), 0 4px 16px rgba(24, 24, 27, 0.06);
+  --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
 }
 
 * {
@@ -16,262 +27,209 @@
 
 body {
   margin: 0;
-  background: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.04), transparent 60%), var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
-  line-height: 1.7;
-}
-
-/* 印刷網點紋理 */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.05;
-  background-image: radial-gradient(circle, #000 0.6px, transparent 0.6px);
-  background-size: 3px 3px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
 }
 
 .page {
-  max-width: 920px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 28px 24px 80px;
-  position: relative;
-  z-index: 2;
+  padding: 32px 24px 80px;
 }
 
-/* ── 精簡標頭 ──────────────────────────────────────── */
-.masthead-mini {
-  margin: 26px 0 22px;
+/* ── 頁首 ──────────────────────────────────────────── */
+.app-header {
+  margin: 0 0 24px;
 }
 
-.masthead-mini h1 {
-  margin: 0 0 10px;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.6rem;
-  letter-spacing: 0.06em;
-}
-
-.rule-thin {
-  border: none;
-  border-top: 1px solid var(--rule);
+.app-header h1 {
   margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 /* ── 搜尋與篩選 ────────────────────────────────────── */
 .catalogue-controls {
   display: grid;
-  grid-template-columns: minmax(220px, 1.8fr) repeat(3, minmax(120px, 1fr));
+  grid-template-columns: minmax(220px, 1.8fr) repeat(3, minmax(130px, 1fr)) auto;
   gap: 12px;
   align-items: end;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--rule-faint);
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
 }
 
 .control-field {
   display: grid;
-  gap: 4px;
+  gap: 5px;
 }
 
 .control-field label {
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-soft);
 }
 
 .control-field input,
 .control-field select,
 .clear-filters {
   min-height: 36px;
-  border: 1px solid var(--rule-faint);
-  border-radius: 0;
-  background: var(--paper);
-  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
   font: inherit;
-  font-size: 0.84rem;
+  font-size: 0.86rem;
 }
 
 .control-field input,
 .control-field select {
   width: 100%;
-  padding: 5px 8px;
+  padding: 6px 10px;
 }
 
 .control-field input::placeholder {
-  color: var(--ink-soft);
-  opacity: 0.8;
+  color: var(--text-faint);
 }
 
 .clear-filters {
-  padding: 5px 10px;
+  padding: 6px 14px;
   cursor: pointer;
+  color: var(--text-soft);
+  white-space: nowrap;
 }
 
 .clear-filters:hover {
-  background: var(--ink);
-  color: var(--paper);
+  border-color: var(--indigo-500);
+  color: var(--indigo-600);
 }
 
 .result-count {
-  margin: 12px 0 0;
+  margin: 0 0 16px;
   font-size: 0.82rem;
-  color: var(--ink-soft);
+  color: var(--text-soft);
 }
 
 .empty-results {
   margin: 0;
-  padding: 38px 0;
-  border-bottom: 1px solid var(--rule-faint);
-  color: var(--ink-soft);
-}
-
-/* ── 分類廣告：曲目卡片 ────────────────────────────── */
-.classifieds {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-.ad {
-  display: grid;
-  grid-template-columns: 108px 1fr;
-  gap: 18px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--rule-faint);
-}
-
-.ad:first-child {
-  border-top: 1px solid var(--rule-faint);
-}
-
-.ad-photo {
-  width: 108px;
-  height: 108px;
-  border: 1px solid var(--rule);
-  background: #d8cfb8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: grayscale(1) contrast(1.15);
-}
-
-.ad-caption {
-  margin: 6px 0 0;
-  font-size: 0.68rem;
-  font-style: italic;
-  color: var(--ink-soft);
+  padding: 48px 16px;
   text-align: center;
-  width: 108px;
+  color: var(--text-soft);
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
 }
 
-.ad-head {
+/* ── 曲目卡片格狀排列 ──────────────────────────────── */
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.ad-title {
+.card-title {
   margin: 0;
-  font-family: var(--font-display);
+  font-size: 1.05rem;
   font-weight: 700;
-  font-size: 1.55rem;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 
-.ad-status {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: 1px solid var(--ink);
-  padding: 2px 9px;
-  white-space: nowrap;
-}
-
-.ad-byline {
-  margin: 4px 0 0;
-  font-size: 0.88rem;
-  color: var(--ink-soft);
-  font-style: italic;
-}
-
-.ad-rating-line {
-  margin: 10px 0 0;
-}
-
-.ad-rating {
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-}
-
-.ad-rating-unrated {
-  color: var(--ink-soft);
-  letter-spacing: 0.04em;
-  font-style: italic;
-}
-
-.ad-bpm {
+.card-byline {
+  margin: 0;
   font-size: 0.85rem;
-  letter-spacing: normal;
-  color: var(--ink-soft);
-  font-style: italic;
+  color: var(--text-soft);
 }
 
-.ad-links {
-  display: grid;
-  gap: 7px;
-}
-
-.ad-link {
-  display: grid;
-  grid-template-columns: auto minmax(0, auto) 1fr;
+/* ── 狀態標籤：同一靛藍色系、依進度深淺漸進 ──────────── */
+.status-badge {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  width: fit-content;
-  font-size: 0.82rem;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.link-type {
-  min-width: 3.6em;
-  padding: 1px 6px;
-  border: 1px solid var(--crimson);
-  color: var(--crimson);
-  text-align: center;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.link-name {
-  color: var(--crimson);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.link-host {
-  color: var(--ink-soft);
+  padding: 3px 11px;
+  border-radius: 999px;
   font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
 }
 
-.ad-link:hover .link-name {
-  text-decoration-thickness: 2px;
+.status-badge-0 {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-soft);
+}
+
+.status-badge-1 {
+  background: var(--indigo-100);
+  color: var(--indigo-700);
+}
+
+.status-badge-2 {
+  background: var(--indigo-300);
+  color: var(--indigo-900);
+}
+
+.status-badge-3 {
+  background: var(--indigo-600);
+  color: #fff;
+}
+
+/* ── 難度：小圓點 ──────────────────────────────────── */
+.difficulty-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.difficulty-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.difficulty-dot.is-filled {
+  background: var(--indigo-500);
+}
+
+.difficulty-unrated {
+  font-size: 0.78rem;
+  color: var(--text-faint);
 }
 
 /* ── 練習進度 ──────────────────────────────────────── */
 .song-progress,
 .progress-unset {
-  margin: 10px 0 0;
+  margin: 0;
 }
 
 .progress-unset {
   font-size: 0.78rem;
-  color: var(--ink-soft);
+  color: var(--text-soft);
 }
 
 .progress-label {
@@ -280,31 +238,31 @@ body::before {
   gap: 12px;
   margin: 0 0 4px;
   font-size: 0.78rem;
-  color: var(--ink-soft);
+  color: var(--text-soft);
 }
 
 .progress-label strong {
-  color: var(--ink);
+  color: var(--text);
 }
 
 .progress-track {
-  height: 5px;
-  border: 1px solid var(--rule-faint);
-  background: var(--paper);
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
   overflow: hidden;
 }
 
 .progress-fill {
   display: block;
   height: 100%;
-  background: var(--crimson);
+  border-radius: inherit;
+  background: var(--indigo-500);
 }
 
-/* ── 練習詳情 ──────────────────────────────────────── */
+/* ── 練習詳情（展開區）───────────────────────────────── */
 .song-details {
-  margin-top: 12px;
-  border-top: 1px solid var(--rule-faint);
-  border-bottom: 1px solid var(--rule-faint);
+  margin-top: 4px;
 }
 
 .song-details > summary {
@@ -312,11 +270,10 @@ body::before {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 7px 0;
-  color: var(--crimson);
+  padding: 6px 0;
+  color: var(--indigo-600);
   font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 600;
   cursor: pointer;
   list-style: none;
 }
@@ -336,12 +293,14 @@ body::before {
 .details-body {
   display: grid;
   gap: 16px;
-  padding: 5px 0 14px;
+  padding-top: 10px;
+  margin-top: 4px;
+  border-top: 1px solid var(--border);
 }
 
 .detail-section {
   padding-top: 12px;
-  border-top: 1px dotted var(--rule-faint);
+  border-top: 1px solid var(--border);
 }
 
 .details-body > .detail-section:first-child {
@@ -351,8 +310,8 @@ body::before {
 
 .detail-section h3 {
   margin: 0 0 8px;
-  font-family: var(--font-display);
-  font-size: 0.94rem;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .detail-heading-row {
@@ -375,19 +334,22 @@ body::before {
 
 .detail-list > div {
   display: grid;
-  grid-template-columns: minmax(90px, 0.35fr) 1fr;
+  grid-template-columns: minmax(80px, 0.4fr) 1fr;
   gap: 12px;
   padding: 7px 0;
-  border-bottom: 1px dotted var(--rule-faint);
+  border-bottom: 1px solid var(--border);
 }
 
 .detail-list dt {
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--text-soft);
 }
 
 .detail-list dd {
   margin: 0;
-  color: var(--ink-soft);
+  font-size: 0.85rem;
+  color: var(--text);
 }
 
 .section-notes,
@@ -398,7 +360,7 @@ body::before {
 .section-notes li,
 .practice-logs li {
   padding: 7px 0;
-  border-bottom: 1px dotted var(--rule-faint);
+  border-bottom: 1px solid var(--border);
 }
 
 .section-notes p,
@@ -415,10 +377,9 @@ body::before {
 
 .section-notes p:last-child,
 .practice-logs p:last-child,
-.detail-list dd,
 .challenge-list {
   font-size: 0.82rem;
-  color: var(--ink-soft);
+  color: var(--text-soft);
 }
 
 .challenge-list {
@@ -429,7 +390,7 @@ body::before {
 .practice-logs span,
 .section-notes span {
   font-size: 0.72rem;
-  color: var(--ink-soft);
+  color: var(--text-faint);
 }
 
 /* ── 節拍器 ────────────────────────────────────────── */
@@ -444,21 +405,22 @@ body::before {
 .metronome button,
 .metronome input[type='number'] {
   min-height: 34px;
-  border: 1px solid var(--rule);
-  border-radius: 0;
-  background: var(--paper);
-  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
   font: inherit;
 }
 
 .metronome button {
-  padding: 4px 12px;
+  padding: 4px 14px;
   cursor: pointer;
 }
 
 .metronome-toggle[aria-pressed='true'] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--indigo-600);
+  border-color: var(--indigo-600);
+  color: #fff;
 }
 
 .bpm-number {
@@ -467,7 +429,8 @@ body::before {
   align-items: center;
   gap: 6px;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--text-soft);
 }
 
 .bpm-number input {
@@ -484,19 +447,19 @@ body::before {
 
 .bpm-slider input {
   width: 100%;
-  accent-color: var(--crimson);
+  accent-color: var(--indigo-500);
 }
 
 .beat-indicator {
   width: 10px;
   height: 10px;
-  border: 1px solid var(--crimson);
+  border: 1px solid var(--indigo-500);
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .beat-indicator.is-pulsing {
-  background: var(--crimson);
+  background: var(--indigo-500);
   transform: scale(1.35);
 }
 
@@ -504,71 +467,106 @@ body::before {
 .metronome-error {
   margin: 6px 0 0;
   font-size: 0.72rem;
-  color: var(--ink-soft);
+  color: var(--text-soft);
 }
 
 .metronome-error {
-  color: var(--crimson);
+  color: #b91c1c;
 }
 
-.ad-tab {
-  margin-top: 10px;
+/* ── 相關連結 ──────────────────────────────────────── */
+.song-links {
+  display: grid;
+  gap: 7px;
 }
 
-.ad-tab summary {
-  font-size: 0.85rem;
-  color: var(--crimson);
+.song-link-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  font-size: 0.82rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.link-type {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--indigo-50);
+  color: var(--indigo-700);
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.link-name {
+  color: var(--indigo-600);
   text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link-host {
+  color: var(--text-faint);
+  font-size: 0.72rem;
+}
+
+.song-link-item:hover .link-name {
+  text-decoration-thickness: 2px;
+}
+
+/* ── 六線譜／和弦 ──────────────────────────────────── */
+.tab-sheet {
+  margin-top: 4px;
+}
+
+.tab-sheet summary {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--indigo-600);
   cursor: pointer;
   width: fit-content;
 }
 
-.ad-tab[open] summary {
+.tab-sheet[open] summary {
   margin-bottom: 10px;
 }
 
-.ad-tab-images {
+.tab-sheet-images {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 8px;
 }
 
-.ad-tab-image {
+.tab-sheet-image {
   max-width: 220px;
   max-height: 300px;
-  border: 1px solid var(--rule);
-  filter: grayscale(1) contrast(1.1);
+  border-radius: 8px;
+  border: 1px solid var(--border);
 }
 
-.ad-tab-text {
+.tab-sheet-text {
   margin: 0;
   padding: 12px 14px;
-  border: 1px solid var(--rule-faint);
-  background: rgba(0, 0, 0, 0.02);
-  font-family: 'Courier New', monospace;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.82rem;
   line-height: 1.5;
   white-space: pre-wrap;
   overflow-x: auto;
 }
 
-.ad-date {
-  margin: 8px 0 0;
-  font-size: 0.72rem;
-  color: var(--ink-soft);
-}
-
 /* ── 頁尾 ──────────────────────────────────────────── */
 .site-footer {
-  margin-top: 24px;
-  padding-top: 14px;
-  border-top: 4px double var(--rule);
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
   text-align: center;
   font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--text-faint);
 }
 
 .site-footer p {
@@ -577,7 +575,7 @@ body::before {
 
 /* ── 無障礙與響應式 ────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--crimson);
+  outline: 2px solid var(--indigo-500);
   outline-offset: 2px;
 }
 
@@ -603,7 +601,7 @@ body::before {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .catalogue-controls {
     grid-template-columns: 1fr 1fr;
   }
@@ -616,17 +614,8 @@ body::before {
     grid-column: 1 / -1;
   }
 
-  .ad {
-    grid-template-columns: 84px 1fr;
-  }
-
-  .ad-photo {
-    width: 84px;
-    height: 84px;
-  }
-
-  .ad-caption {
-    width: 84px;
+  .song-grid {
+    grid-template-columns: 1fr;
   }
 
   .metronome-controls {
@@ -641,13 +630,5 @@ body::before {
   .detail-list > div {
     grid-template-columns: 1fr;
     gap: 2px;
-  }
-
-  .ad-link {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .link-host {
-    grid-column: 2;
   }
 }

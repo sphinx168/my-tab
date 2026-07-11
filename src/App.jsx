@@ -66,9 +66,8 @@ export default function App() {
 
   return (
     <div className="page">
-      <header className="masthead-mini">
+      <header className="app-header">
         <h1>曲目一覽</h1>
-        <hr className="rule-thin" />
       </header>
 
       <main>
@@ -116,7 +115,7 @@ export default function App() {
 
         <p className="result-count" aria-live="polite">顯示 {visibleSongs.length} 首曲目</p>
 
-        <section className="classifieds" aria-label="歌曲列表">
+        <section className="song-grid" aria-label="歌曲列表">
           {visibleSongs.map((song) => (
             <SongCard
               key={song.id}
