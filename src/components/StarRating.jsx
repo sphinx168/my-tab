@@ -1,10 +1,6 @@
 export default function StarRating({ value }) {
   if (!value) {
-    return (
-      <span className="ad-rating">
-        <span className="ad-rating-empty">★★★★★</span>　難度未評
-      </span>
-    );
+    return <span className="ad-rating ad-rating-unrated">難度未評</span>;
   }
   const stars = '★'.repeat(value) + '☆'.repeat(5 - value);
   return (

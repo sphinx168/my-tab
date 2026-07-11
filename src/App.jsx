@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import songs from './data/songs.json';
 import SongCard from './components/SongCard';
 import { STATUSES } from './data/songUtils';
@@ -28,6 +28,7 @@ export default function App() {
   const [status, setStatus] = useState('all');
   const [difficulty, setDifficulty] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
+  const [activeMetronomeId, setActiveMetronomeId] = useState(null);
 
   const visibleSongs = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -46,11 +47,21 @@ export default function App() {
 
   const hasFilters = query || status !== 'all' || difficulty !== 'all' || sortBy !== 'newest';
 
+  useEffect(() => {
+    if (activeMetronomeId && !visibleSongs.some((song) => song.id === activeMetronomeId)) {
+      setActiveMetronomeId(null);
+    }
+  }, [activeMetronomeId, visibleSongs]);
+
   function clearFilters() {
     setQuery('');
     setStatus('all');
     setDifficulty('all');
     setSortBy('newest');
+  }
+
+  function deactivateMetronome(songId) {
+    setActiveMetronomeId((currentId) => currentId === songId ? null : currentId);
   }
 
   return (
@@ -107,7 +118,13 @@ export default function App() {
 
         <section className="classifieds" aria-label="歌曲列表">
           {visibleSongs.map((song) => (
-            <SongCard key={song.id} song={song} />
+            <SongCard
+              key={song.id}
+              song={song}
+              activeMetronomeId={activeMetronomeId}
+              onActivateMetronome={setActiveMetronomeId}
+              onDeactivateMetronome={deactivateMetronome}
+            />
           ))}
           {visibleSongs.length === 0 && (
             <p className="empty-results">找不到符合條件的曲目，試著調整搜尋或篩選條件。</p>

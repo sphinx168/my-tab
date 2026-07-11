@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## 專案概要
 
@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 指令
 
 ```bash
-npm run dev       # 開發伺服器（port 5173，.claude/launch.json 已設定 preview）
+npm run dev       # 開發伺服器（port 5173，.Codex/launch.json 已設定 preview）
 npm run build     # 建置到 dist/
 npm test          # 使用 Node 內建測試執行時間與完成度工具測試
 ```

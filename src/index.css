@@ -208,9 +208,10 @@ body::before {
   letter-spacing: 2px;
 }
 
-.ad-rating-empty {
-  opacity: 0.25;
-  letter-spacing: 2px;
+.ad-rating-unrated {
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  font-style: italic;
 }
 
 .ad-bpm {
@@ -221,39 +222,293 @@ body::before {
 }
 
 .ad-links {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: grid;
+  gap: 7px;
 }
 
 .ad-link {
-  font-size: 0.85rem;
-  color: var(--crimson);
-  text-decoration: underline;
-  width: fit-content;
-}
-
-.spotify-btn {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, auto) 1fr;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   width: fit-content;
-  margin-top: 2px;
-  padding: 5px 14px 5px 10px;
-  font-family: var(--font-body);
   font-size: 0.82rem;
-  font-weight: 700;
   color: var(--ink);
   text-decoration: none;
-  border: 1.5px solid var(--ink);
-  border-radius: 999px;
-  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.spotify-btn:hover {
+.link-type {
+  min-width: 3.6em;
+  padding: 1px 6px;
+  border: 1px solid var(--crimson);
+  color: var(--crimson);
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.link-name {
+  color: var(--crimson);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link-host {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+}
+
+.ad-link:hover .link-name {
+  text-decoration-thickness: 2px;
+}
+
+/* ── 練習進度 ──────────────────────────────────────── */
+.song-progress,
+.progress-unset {
+  margin: 10px 0 0;
+}
+
+.progress-unset {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.progress-label strong {
+  color: var(--ink);
+}
+
+.progress-track {
+  height: 5px;
+  border: 1px solid var(--rule-faint);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  background: var(--crimson);
+}
+
+/* ── 練習詳情 ──────────────────────────────────────── */
+.song-details {
+  margin-top: 12px;
+  border-top: 1px solid var(--rule-faint);
+  border-bottom: 1px solid var(--rule-faint);
+}
+
+.song-details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 7px 0;
+  color: var(--crimson);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  list-style: none;
+}
+
+.song-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-marker {
+  transition: transform 0.15s ease;
+}
+
+.song-details[open] .details-marker {
+  transform: rotate(45deg);
+}
+
+.details-body {
+  display: grid;
+  gap: 16px;
+  padding: 5px 0 14px;
+}
+
+.detail-section {
+  padding-top: 12px;
+  border-top: 1px dotted var(--rule-faint);
+}
+
+.details-body > .detail-section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.detail-section h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+}
+
+.detail-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detail-heading-row h3 {
+  margin-bottom: 0;
+}
+
+.detail-list,
+.section-notes,
+.challenge-list,
+.practice-logs {
+  margin: 0;
+  padding: 0;
+}
+
+.detail-list > div {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.35fr) 1fr;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px dotted var(--rule-faint);
+}
+
+.detail-list dt {
+  font-weight: 700;
+}
+
+.detail-list dd {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.section-notes,
+.practice-logs {
+  list-style: none;
+}
+
+.section-notes li,
+.practice-logs li {
+  padding: 7px 0;
+  border-bottom: 1px dotted var(--rule-faint);
+}
+
+.section-notes p,
+.practice-logs p {
+  margin: 0;
+}
+
+.section-notes p:first-child,
+.practice-logs p:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-notes p:last-child,
+.practice-logs p:last-child,
+.detail-list dd,
+.challenge-list {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.challenge-list {
+  padding-left: 1.2rem;
+}
+
+.practice-logs time,
+.practice-logs span,
+.section-notes span {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+/* ── 節拍器 ────────────────────────────────────────── */
+.metronome-controls {
+  display: grid;
+  grid-template-columns: auto auto minmax(120px, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+  margin-top: 10px;
+}
+
+.metronome button,
+.metronome input[type='number'] {
+  min-height: 34px;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+
+.metronome button {
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.metronome-toggle[aria-pressed='true'] {
   background: var(--ink);
   color: var(--paper);
+}
+
+.bpm-number {
+  display: grid;
+  grid-template-columns: auto 58px;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.bpm-number input {
+  width: 58px;
+  padding: 3px 5px;
+  text-align: center;
+}
+
+.bpm-slider {
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+}
+
+.bpm-slider input {
+  width: 100%;
+  accent-color: var(--crimson);
+}
+
+.beat-indicator {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--crimson);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.beat-indicator.is-pulsing {
+  background: var(--crimson);
+  transform: scale(1.35);
+}
+
+.metronome-status,
+.metronome-error {
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.metronome-error {
+  color: var(--crimson);
 }
 
 .ad-tab {
@@ -298,12 +553,6 @@ body::before {
   overflow-x: auto;
 }
 
-.ad-notes {
-  margin: 10px 0 0;
-  font-size: 0.88rem;
-  color: var(--ink-soft);
-}
-
 .ad-date {
   margin: 8px 0 0;
   font-size: 0.72rem;
@@ -332,9 +581,25 @@ body::before {
   outline-offset: 2px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+  }
+
+  .beat-indicator.is-pulsing {
+    transform: none;
   }
 }
 
@@ -362,5 +627,27 @@ body::before {
 
   .ad-caption {
     width: 84px;
+  }
+
+  .metronome-controls {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .bpm-slider {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .detail-list > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .ad-link {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .link-host {
+    grid-column: 2;
   }
 }

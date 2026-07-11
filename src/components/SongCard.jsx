@@ -1,9 +1,9 @@
 import StarRating from './StarRating';
 import StatusBadge from './StatusBadge';
-import SongLink from './SongLink';
-import TabSheet from './TabSheet';
+import ProgressIndicator from './ProgressIndicator';
+import SongDetails from './SongDetails';
 
-export default function SongCard({ song }) {
+export default function SongCard({ song, activeMetronomeId, onActivateMetronome, onDeactivateMetronome }) {
   return (
     <article className="ad">
       <div>
@@ -24,7 +24,7 @@ export default function SongCard({ song }) {
           <StatusBadge status={song.status} />
         </div>
         <p className="ad-byline">
-          {song.artist} 演唱 · {song.tabAuthor} 採譜
+          {song.artist} 演唱{song.tabAuthor && ` · ${song.tabAuthor} 採譜`}
         </p>
 
         <p className="ad-rating-line">
@@ -32,17 +32,14 @@ export default function SongCard({ song }) {
           {song.bpm > 0 && <span className="ad-bpm">　·　每分鐘 {song.bpm} 拍</span>}
         </p>
 
-        {song.links?.length > 0 && (
-          <div className="ad-links">
-            {song.links.map((link) => (
-              <SongLink key={link.url} link={link} />
-            ))}
-          </div>
-        )}
+        <ProgressIndicator progress={song.progress} />
 
-        <TabSheet sheet={song.sheet} />
-
-        {song.notes && <p className="ad-notes">{song.notes}</p>}
+        <SongDetails
+          song={song}
+          activeMetronomeId={activeMetronomeId}
+          onActivateMetronome={onActivateMetronome}
+          onDeactivateMetronome={onDeactivateMetronome}
+        />
 
         {song.addedAt && <p className="ad-date">刊登日期：{song.addedAt}</p>}
       </div>

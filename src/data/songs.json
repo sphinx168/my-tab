@@ -5,14 +5,20 @@
     "artist": "告五人",
     "tabAuthor": "拨片大王",
     "links": [
-      { "url": "https://www.bilibili.com/video/BV1yNVnz2EoM/?vd_source=c93157593fb668878a2472834feb5d36", "label": "全曲示範" },
-      { "url": "https://open.spotify.com/track/27FOde2nUw0pFuj7hlPbaS", "label": "原曲 Spotify" },
-      { "url": "https://www.songsterr.com/a/wsa/tab-s1380411t0", "label": "Songsterr 互動譜" }
+      { "url": "https://www.bilibili.com/video/BV1yNVnz2EoM/?vd_source=c93157593fb668878a2472834feb5d36", "label": "全曲示範", "type": "tutorial" },
+      { "url": "https://open.spotify.com/track/27FOde2nUw0pFuj7hlPbaS", "label": "Spotify", "type": "original" },
+      { "url": "https://www.songsterr.com/a/wsa/tab-s1380411t0", "label": "Songsterr", "type": "interactive" }
     ],
     "status": "practicing",
     "difficulty": 0,
     "bpm": 140,
-    "notes": "目前練到 2:23，要注意強弱對比，還有刷弦的範圍。",
+    "progress": { "current": "2:23", "duration": null },
+    "details": {
+      "versions": [],
+      "sections": [],
+      "challenges": ["注意強弱對比與刷弦範圍。"],
+      "practiceLogs": []
+    },
     "addedAt": "2026-07-05"
   },
   {
@@ -21,13 +27,14 @@
     "artist": "ONE OK ROCK",
     "tabAuthor": "かずき / ギターのある暮らし",
     "links": [
-      { "url": "https://www.youtube.com/watch?v=4zkauj_W34U", "label": "教學影片" },
-      { "url": "https://open.spotify.com/track/3fSdTVHwb8ZyiYAFSE00qd", "label": "原曲 Spotify" }
+      { "url": "https://www.youtube.com/watch?v=4zkauj_W34U", "label": "教學影片", "type": "tutorial" },
+      { "url": "https://open.spotify.com/track/3fSdTVHwb8ZyiYAFSE00qd", "label": "Spotify", "type": "original" }
     ],
     "status": "want-to-learn",
     "difficulty": 0,
     "bpm": 159,
-    "notes": "",
+    "progress": { "current": "0:00", "duration": null },
+    "details": { "versions": [], "sections": [], "challenges": [], "practiceLogs": [] },
     "addedAt": "2026-07-05"
   },
   {
@@ -36,13 +43,14 @@
     "artist": "怕胖團",
     "tabAuthor": "小溫WEN",
     "links": [
-      { "url": "https://www.youtube.com/watch?v=cXWuURQWVM4", "label": "雙吉他編制教學" },
-      { "url": "https://open.spotify.com/track/0zru06eFVhTcexrcnjnQAj", "label": "原曲 Spotify" }
+      { "url": "https://www.youtube.com/watch?v=cXWuURQWVM4", "label": "雙吉他編制教學", "type": "tutorial" },
+      { "url": "https://open.spotify.com/track/0zru06eFVhTcexrcnjnQAj", "label": "Spotify", "type": "original" }
     ],
     "status": "want-to-learn",
     "difficulty": 0,
     "bpm": 97,
-    "notes": "",
+    "progress": { "current": "0:00", "duration": null },
+    "details": { "versions": [], "sections": [], "challenges": [], "practiceLogs": [] },
     "addedAt": "2026-07-05"
   },
   {
@@ -54,7 +62,8 @@
     "status": "want-to-learn",
     "difficulty": 0,
     "bpm": 0,
-    "notes": "",
+    "progress": { "current": "0:00", "duration": null },
+    "details": { "versions": [], "sections": [], "challenges": [], "practiceLogs": [] },
     "addedAt": "2026-07-06"
   },
   {
@@ -66,7 +75,8 @@
     "status": "want-to-learn",
     "difficulty": 0,
     "bpm": 0,
-    "notes": "",
+    "progress": { "current": "0:00", "duration": null },
+    "details": { "versions": [], "sections": [], "challenges": [], "practiceLogs": [] },
     "addedAt": "2026-07-06"
   },
   {
@@ -78,7 +88,8 @@
     "status": "want-to-learn",
     "difficulty": 0,
     "bpm": 0,
-    "notes": "",
+    "progress": { "current": "0:00", "duration": null },
+    "details": { "versions": [], "sections": [], "challenges": [], "practiceLogs": [] },
     "addedAt": "2026-07-06"
   },
   {
@@ -87,13 +98,14 @@
     "artist": "結束バンド",
     "tabAuthor": "奔奔史密斯",
     "links": [
-      { "url": "https://www.bilibili.com/video/BV1gP411i7ds/", "label": "教學影片" },
-      { "url": "https://open.spotify.com/track/2pK7RDBr3pc79fvFLCWpBW", "label": "原曲 Spotify" }
+      { "url": "https://www.bilibili.com/video/BV1gP411i7ds/", "label": "教學影片", "type": "tutorial" },
+      { "url": "https://open.spotify.com/track/2pK7RDBr3pc79fvFLCWpBW", "label": "Spotify", "type": "original" }
     ],
     "status": "want-to-learn",
     "difficulty": 2,
     "bpm": 149,
-    "notes": "",
+    "progress": { "current": "0:00", "duration": null },
+    "details": { "versions": [], "sections": [], "challenges": [], "practiceLogs": [] },
     "addedAt": "2026-07-10"
   },
   {
@@ -102,13 +114,14 @@
     "artist": "結束バンド",
     "tabAuthor": "奔奔史密斯",
     "links": [
-      { "url": "https://www.bilibili.com/video/BV16SLJzyEYk/", "label": "教學影片" },
-      { "url": "https://open.spotify.com/track/2XQ0xNRjpO6xEwPTow2wCn", "label": "原曲 Spotify" }
+      { "url": "https://www.bilibili.com/video/BV16SLJzyEYk/", "label": "教學影片", "type": "tutorial" },
+      { "url": "https://open.spotify.com/track/2XQ0xNRjpO6xEwPTow2wCn", "label": "Spotify", "type": "original" }
     ],
     "status": "want-to-learn",
     "difficulty": 4,
     "bpm": 153,
-    "notes": "",
+    "progress": { "current": "0:00", "duration": null },
+    "details": { "versions": [], "sections": [], "challenges": [], "practiceLogs": [] },
     "addedAt": "2026-07-10"
   }
 ]
