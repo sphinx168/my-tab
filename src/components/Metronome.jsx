@@ -66,12 +66,12 @@ export default function Metronome({ songId, songBpm, activeId, onActivate, onDea
       const oscillator = context.createOscillator();
       const gain = context.createGain();
       oscillator.frequency.setValueAtTime(1100, beatTime);
-      gain.gain.setValueAtTime(0.12, beatTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, beatTime + 0.04);
+      gain.gain.setValueAtTime(0.3, beatTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, beatTime + 0.06);
       oscillator.connect(gain);
       gain.connect(context.destination);
       oscillator.start(beatTime);
-      oscillator.stop(beatTime + 0.05);
+      oscillator.stop(beatTime + 0.07);
 
       schedulePulse(Math.max(0, (beatTime - context.currentTime) * 1000));
       nextBeatTimeRef.current += 60 / bpmRef.current;
@@ -91,6 +91,15 @@ export default function Metronome({ songId, songBpm, activeId, onActivate, onDea
     try {
       const context = new AudioContextClass();
       audioContextRef.current = context;
+
+      // iOS Safari 有時光呼叫 resume() 無法真正解鎖音訊輸出,
+      // 需要在使用者手勢當下同步播放一個實際的（哪怕無聲的）音訊節點才可靠。
+      const unlockBuffer = context.createBuffer(1, 1, 22050);
+      const unlockSource = context.createBufferSource();
+      unlockSource.buffer = unlockBuffer;
+      unlockSource.connect(context.destination);
+      unlockSource.start(0);
+
       if (context.state === 'suspended') await context.resume();
       nextBeatTimeRef.current = context.currentTime + 0.05;
       onActivate(songId);
