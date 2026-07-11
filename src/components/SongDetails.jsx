@@ -1,6 +1,7 @@
 import Metronome from './Metronome';
 import SongLink from './SongLink';
 import TabSheet from './TabSheet';
+import ProgressIndicator from './ProgressIndicator';
 
 export default function SongDetails({ song, activeMetronomeId, onActivateMetronome, onDeactivateMetronome }) {
   const versions = song.details?.versions || [];
@@ -23,6 +24,30 @@ export default function SongDetails({ song, activeMetronomeId, onActivateMetrono
       </summary>
 
       <div className="details-body">
+        <section className="detail-section">
+          <dl className="detail-list">
+            {song.tabAuthor && (
+              <div>
+                <dt>採譜者</dt>
+                <dd>{song.tabAuthor}</dd>
+              </div>
+            )}
+            {song.bpm > 0 && (
+              <div>
+                <dt>BPM</dt>
+                <dd>每分鐘 {song.bpm} 拍</dd>
+              </div>
+            )}
+            {song.addedAt && (
+              <div>
+                <dt>收錄日期</dt>
+                <dd>{song.addedAt}</dd>
+              </div>
+            )}
+          </dl>
+          <ProgressIndicator progress={song.progress} />
+        </section>
+
         <Metronome
           songId={song.id}
           songBpm={song.bpm}
@@ -34,7 +59,7 @@ export default function SongDetails({ song, activeMetronomeId, onActivateMetrono
         {song.links?.length > 0 && (
           <section className="detail-section">
             <h3>相關連結</h3>
-            <div className="ad-links">
+            <div className="song-links">
               {song.links.map((link) => <SongLink key={link.url} link={link} />)}
             </div>
           </section>
