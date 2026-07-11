@@ -45,3 +45,13 @@ npm test          # 使用 Node 內建測試執行時間與完成度工具測試
 - push 到 `main` 即自動部署：`.github/workflows/deploy.yml` 會建置並發布到 GitHub Pages（repo Settings → Pages → Source 需設定為「GitHub Actions」）。
 - `vite.config.js` 設定 `base: '/my-tab/'`，對應 GitHub Pages 的專案子路徑（`https://sphinx168.github.io/my-tab/`）；若之後改用自訂網域，記得把 `base` 改回 `/`。
 - 需要手動觸發部署時，到 repo 的 Actions 頁籤手動執行 `Deploy to GitHub Pages` workflow（已設定 `workflow_dispatch`）。
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues on `sphinx168/my-tab` (uses the `gh` CLI). See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context — one `CONTEXT.md` + `docs/adr/` at the repo root (not yet created; skills create them lazily). See `docs/agents/domain.md`.
