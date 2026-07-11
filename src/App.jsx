@@ -3,8 +3,6 @@ import songs from './data/songs.json';
 import SongCard from './components/SongCard';
 import { STATUSES } from './data/songUtils';
 
-const statusOptions = Object.entries(STATUSES);
-
 function sortSongs(items, sortBy) {
   const byTitle = (a, b) => a.title.localeCompare(b.title, 'zh-Hant');
   const byNewest = (a, b) => (b.addedAt || '').localeCompare(a.addedAt || '') || byTitle(a, b);
@@ -24,41 +22,16 @@ function sortSongs(items, sortBy) {
 }
 
 export default function App() {
-  const [query, setQuery] = useState('');
-  const [status, setStatus] = useState('all');
-  const [difficulty, setDifficulty] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
   const [activeMetronomeId, setActiveMetronomeId] = useState(null);
 
-  const visibleSongs = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase();
-    const matches = songs.filter((song) => {
-      const searchTarget = [song.title, song.artist, song.tabAuthor].join(' ').toLocaleLowerCase();
-      const matchesQuery = !normalizedQuery || searchTarget.includes(normalizedQuery);
-      const matchesStatus = status === 'all' || song.status === status;
-      const matchesDifficulty = difficulty === 'all'
-        || (difficulty === 'unrated' ? !song.difficulty : song.difficulty === Number(difficulty));
-
-      return matchesQuery && matchesStatus && matchesDifficulty;
-    });
-
-    return sortSongs(matches, sortBy);
-  }, [query, status, difficulty, sortBy]);
-
-  const hasFilters = query || status !== 'all' || difficulty !== 'all' || sortBy !== 'newest';
+  const visibleSongs = useMemo(() => sortSongs(songs, sortBy), [sortBy]);
 
   useEffect(() => {
     if (activeMetronomeId && !visibleSongs.some((song) => song.id === activeMetronomeId)) {
       setActiveMetronomeId(null);
     }
   }, [activeMetronomeId, visibleSongs]);
-
-  function clearFilters() {
-    setQuery('');
-    setStatus('all');
-    setDifficulty('all');
-    setSortBy('newest');
-  }
 
   function deactivateMetronome(songId) {
     setActiveMetronomeId((currentId) => currentId === songId ? null : currentId);
@@ -71,35 +44,7 @@ export default function App() {
       </header>
 
       <main>
-        <section className="catalogue-controls" aria-label="搜尋、篩選與排序">
-          <div className="control-field control-search">
-            <label htmlFor="song-search">搜尋曲目</label>
-            <input
-              id="song-search"
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="歌名、歌手或採譜者"
-            />
-          </div>
-
-          <div className="control-field">
-            <label htmlFor="status-filter">學習狀態</label>
-            <select id="status-filter" value={status} onChange={(event) => setStatus(event.target.value)}>
-              <option value="all">全部狀態</option>
-              {statusOptions.map(([key, info]) => <option key={key} value={key}>{info.label}</option>)}
-            </select>
-          </div>
-
-          <div className="control-field">
-            <label htmlFor="difficulty-filter">難度</label>
-            <select id="difficulty-filter" value={difficulty} onChange={(event) => setDifficulty(event.target.value)}>
-              <option value="all">全部難度</option>
-              <option value="unrated">難度未評</option>
-              {[1, 2, 3, 4, 5].map((value) => <option key={value} value={value}>{value} 星</option>)}
-            </select>
-          </div>
-
+        <section className="catalogue-controls" aria-label="排序">
           <div className="control-field">
             <label htmlFor="sort-by">排序</label>
             <select id="sort-by" value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
@@ -109,8 +54,6 @@ export default function App() {
               <option value="bpm">BPM：慢至快</option>
             </select>
           </div>
-
-          {hasFilters && <button type="button" className="clear-filters" onClick={clearFilters}>清除條件</button>}
         </section>
 
         <p className="result-count" aria-live="polite">顯示 {visibleSongs.length} 首曲目</p>
