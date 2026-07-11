@@ -463,6 +463,42 @@ body {
   transform: scale(1.35);
 }
 
+.beat-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-faint);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.beat-indicator.is-accent {
+  background: var(--indigo-700);
+  border-color: var(--indigo-700);
+  transform: scale(1.7);
+}
+
+.volume-control {
+  display: grid;
+  grid-template-columns: auto minmax(120px, 1fr) 3.2rem;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.volume-control input {
+  width: 100%;
+  accent-color: var(--indigo-500);
+}
+
+.volume-control output {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 .metronome-status,
 .metronome-error {
   margin: 6px 0 0;

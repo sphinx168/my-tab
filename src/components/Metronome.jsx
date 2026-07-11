@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 const MIN_BPM = 40;
 const MAX_BPM = 240;
+const DEFAULT_VOLUME = 70;
+const BEATS_PER_MEASURE = 4;
 
 function clampBpm(value) {
   return Math.min(MAX_BPM, Math.max(MIN_BPM, Math.round(value)));
@@ -23,9 +25,22 @@ function scheduleOscillator(context, time, options) {
   oscillator.stop(time + options.duration + 0.01);
 }
 
-function scheduleTone(context, time) {
+function scheduleTone(context, time, isAccent, volume) {
+  const volumeScale = volume / 100;
+  if (volumeScale <= 0) return;
+
+  if (isAccent) {
+    scheduleOscillator(context, time, {
+      type: 'triangle', frequency: 1550, endFrequency: 1080, gain: 0.13 * volumeScale, duration: 0.085,
+    });
+    scheduleOscillator(context, time, {
+      type: 'sine', frequency: 780, endFrequency: 620, gain: 0.04 * volumeScale, duration: 0.075,
+    });
+    return;
+  }
+
   scheduleOscillator(context, time, {
-    type: 'triangle', frequency: 1200, endFrequency: 920, gain: 0.09, duration: 0.075,
+    type: 'triangle', frequency: 1200, endFrequency: 920, gain: 0.09 * volumeScale, duration: 0.075,
   });
 }
 
@@ -38,18 +53,27 @@ export default function Metronome({
 }) {
   const initialBpm = songBpm > 0 ? songBpm : 120;
   const [bpm, setBpm] = useState(initialBpm);
+  const [volume, setVolume] = useState(DEFAULT_VOLUME);
   const [pulse, setPulse] = useState(false);
+  const [accentPulse, setAccentPulse] = useState(false);
+  const [beatPosition, setBeatPosition] = useState(1);
   const [error, setError] = useState('');
   const audioContextRef = useRef(null);
   const schedulerRef = useRef(null);
   const pulseTimersRef = useRef(new Set());
   const nextBeatTimeRef = useRef(0);
   const bpmRef = useRef(bpm);
+  const volumeRef = useRef(volume);
+  const beatIndexRef = useRef(0);
   const isActive = activeId === songId;
 
   useEffect(() => {
     bpmRef.current = bpm;
   }, [bpm]);
+
+  useEffect(() => {
+    volumeRef.current = volume;
+  }, [volume]);
 
   const stopAudio = useCallback(() => {
     if (schedulerRef.current) {
@@ -59,6 +83,8 @@ export default function Metronome({
     pulseTimersRef.current.forEach((timer) => window.clearTimeout(timer));
     pulseTimersRef.current.clear();
     setPulse(false);
+    setAccentPulse(false);
+    setBeatPosition(1);
 
     if (audioContextRef.current) {
       audioContextRef.current.close().catch(() => {});
@@ -72,13 +98,16 @@ export default function Metronome({
 
   useEffect(() => stopAudio, [stopAudio]);
 
-  function schedulePulse(delay) {
+  function schedulePulse(delay, beatNumber, isAccent) {
     const startTimer = window.setTimeout(() => {
       pulseTimersRef.current.delete(startTimer);
+      setBeatPosition(beatNumber);
+      setAccentPulse(isAccent);
       setPulse(true);
       const endTimer = window.setTimeout(() => {
         pulseTimersRef.current.delete(endTimer);
         setPulse(false);
+        setAccentPulse(false);
       }, 70);
       pulseTimersRef.current.add(endTimer);
     }, delay);
@@ -91,9 +120,12 @@ export default function Metronome({
 
     while (nextBeatTimeRef.current < context.currentTime + 0.1) {
       const beatTime = nextBeatTimeRef.current;
-      scheduleTone(context, beatTime);
+      const beatNumber = beatIndexRef.current + 1;
+      const isAccent = beatNumber === 1;
+      scheduleTone(context, beatTime, isAccent, volumeRef.current);
 
-      schedulePulse(Math.max(0, (beatTime - context.currentTime) * 1000));
+      schedulePulse(Math.max(0, (beatTime - context.currentTime) * 1000), beatNumber, isAccent);
+      beatIndexRef.current = (beatIndexRef.current + 1) % BEATS_PER_MEASURE;
       nextBeatTimeRef.current += 60 / bpmRef.current;
     }
   }
@@ -122,6 +154,7 @@ export default function Metronome({
 
       if (context.state === 'suspended') await context.resume();
       nextBeatTimeRef.current = context.currentTime + 0.05;
+      beatIndexRef.current = 0;
       onActivate(songId);
       scheduleBeats();
       schedulerRef.current = window.setInterval(scheduleBeats, 25);
@@ -142,11 +175,19 @@ export default function Metronome({
     setBpm(clampBpm(value));
   }
 
+  function resetSettings() {
+    setBpm(initialBpm);
+    setVolume(DEFAULT_VOLUME);
+  }
+
   return (
     <section className="detail-section metronome" aria-labelledby={`metronome-${songId}`}>
       <div className="detail-heading-row">
         <h3 id={`metronome-${songId}`}>節拍器</h3>
-        <span className={`beat-indicator${pulse ? ' is-pulsing' : ''}`} aria-hidden="true" />
+        <div className="beat-display" aria-hidden="true">
+          <span>{beatPosition} / {BEATS_PER_MEASURE}</span>
+          <span className={`beat-indicator${pulse ? ' is-pulsing' : ''}${accentPulse ? ' is-accent' : ''}`} />
+        </div>
       </div>
 
       <div className="metronome-controls">
@@ -183,13 +224,26 @@ export default function Metronome({
           />
         </label>
 
-        <button type="button" className="metronome-reset" onClick={() => setBpm(initialBpm)}>
+        <button type="button" className="metronome-reset" onClick={resetSettings}>
           重設
         </button>
       </div>
 
+      <label className="volume-control" htmlFor={`volume-${songId}`}>
+        <span>音量</span>
+        <input
+          id={`volume-${songId}`}
+          type="range"
+          min="0"
+          max="100"
+          value={volume}
+          onChange={(event) => setVolume(Number(event.target.value))}
+        />
+        <output htmlFor={`volume-${songId}`}>{volume}%</output>
+      </label>
+
       <p className="metronome-status" aria-live="polite">
-        {isActive ? `播放中 · 每分鐘 ${bpm} 拍` : `目前設定 · 每分鐘 ${bpm} 拍`}
+        {isActive ? `播放中 · 4/4 拍 · 每分鐘 ${bpm} 拍` : `目前設定 · 4/4 拍 · 每分鐘 ${bpm} 拍`}
       </p>
       {error && <p className="metronome-error" role="alert">{error}</p>}
     </section>
