@@ -32,10 +32,20 @@ npm test          # 使用 Node 內建測試執行時間與完成度工具測試
   - `sheet.images`：字串陣列，放「上傳」的譜面掃描圖／照片路徑。圖檔先放進 `public/tabs/`，再以 `/tabs/檔名` 路徑填入陣列。
   - 兩者都留空或整個 `sheet` 省略時，卡片不顯示該區塊。
 
+## 日常工作流程：新增/編輯跟練影片
+
+「跟練影片」是與歌曲收藏分開的獨立分類，資料在 `src/data/videos.json`（一部影片一筆），頁面上以「曲目／跟練影片」分頁切換顯示。欄位約定：
+
+- `id`：kebab-case 唯一識別碼
+- `title`：影片標題
+- `url`：YouTube 網址（支援 `youtu.be/<id>` 或 `youtube.com/watch?v=<id>` 兩種格式，卡片會自動解析並內嵌播放器；解析不出 ID 時退回純文字外部連結）
+- `note`：選填備註，例如慢速跟彈版、含 Tab 字幕等
+- `addedAt`（`YYYY-MM-DD`）供影片列表新到舊排序使用
+
 ## 架構
 
-- `src/App.jsx`：唯一的頁面。build 時直接 import `songs.json`，提供歌名搜尋、狀態／難度篩選與排序，並管理全頁唯一的作用中節拍器。
-- `src/components/`：`SongCard` 顯示曲目摘要與進度；`SongDetails` 用原生 `<details>` 收合連結、節拍器、結構化筆記與譜面；`Metronome` 使用 Web Audio API，以「電子・柔亮」音色播放，提供 0–100% 音量控制與固定 4/4 拍第一拍重音，且全頁同時只播放一個。`TabSheet` 在詳情內二次收合六線譜／和弦內容。
+- `src/App.jsx`：唯一的頁面。build 時直接 import `songs.json` 與 `videos.json`，以分頁切換（`view` state）顯示「曲目」或「跟練影片」。曲目分頁提供狀態／難度排序，並管理全頁唯一的作用中節拍器；跟練影片分頁依收錄日期新到舊排序。
+- `src/components/`：`SongCard` 顯示曲目摘要與進度；`SongDetails` 用原生 `<details>` 收合連結、節拍器、結構化筆記與譜面；`Metronome` 使用 Web Audio API，以「電子・柔亮」音色播放，提供 0–100% 音量控制與固定 4/4 拍第一拍重音，且全頁同時只播放一個。`TabSheet` 在詳情內二次收合六線譜／和弦內容。`VideoCard` 顯示跟練影片標題與內嵌 YouTube 播放器（透過 `src/data/videoUtils.js` 的 `getYouTubeEmbedUrl` 解析網址）。
 - 樣式在 `src/index.css`，手寫 CSS、無 UI 套件。設計主題「老報紙」：米白報紙底色、黑色襯線鉛字，色票與字體定義在 `:root` CSS 變數（`--paper`、`--ink`、`--crimson` 等），新樣式一律取用變數而非硬編色碼。字體：Playfair Display（標題）+ Noto Serif TC（內文），由 `index.html` 載入 Google Fonts。難度星等與連結皆為純文字呈現（無圖示），維持印刷品的單色調性。
 - 介面文字為繁體中文。
 - 頁尾「最後更新」日期是建置時間戳，非手動維護：`vite.config.js` 的 `define.__BUILD_DATE__` 在建置當下取當天日期字串，`App.jsx` 直接引用該全域常數。每次 push 觸發 GitHub Actions 重新建置就會自動更新，不需要手動改日期。
