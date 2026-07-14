@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test src/data/songUtils.test.js"
+    "test": "node --test src/data/songUtils.test.js src/data/videoUtils.test.js"
   },
   "dependencies": {
     "react": "^19.1.0",
